@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="mission_taital">Galeri Sekolah</h1>
-                <p class="mission_text">Dokumentasi kegiatan dan momen berharga di sekolah kami</p>
+                <h1 class="mission_taital animate-text">Galeri Sekolah</h1>
+                <p class="mission_text animate-text">Dokumentasi kegiatan dan momen berharga di sekolah kami</p>
             </div>
         </div>
     </div>
@@ -12,7 +12,7 @@
             <div class="row">
                 @foreach($images as $galleryId => $gallery)
                 <div class="col-md-3 mb-4">
-                    <div class="container_main gallery-item" data-gallery-id="{{ $galleryId }}">
+                    <div class="container_main gallery-item animate-box" data-gallery-id="{{ $galleryId }}" data-delay="{{ $loop->index * 100 }}">
                         <img src="{{ asset('images/' . $gallery['images'][0]['file']) }}" alt="{{ $gallery['gallery_name'] }}" class="image">
                         <div class="overlay">
                             <div class="text">
@@ -162,15 +162,64 @@ $(document).ready(function() {
 
 <style>
 .gallery-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
     cursor: pointer;
-    transition: transform 0.3s ease;
 }
 
-.gallery-item:hover {
-    transform: scale(1.02);
+.gallery-item.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Lightbox styles */
+/* Style untuk container dan overlay */
+.container_main {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.container_main:hover {
+    transform: translateY(-5px);
+}
+
+.image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+}
+
+.container_main:hover .overlay {
+    opacity: 1;
+}
+
+.text {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+}
+
+/* Style untuk lightbox */
 .lightbox {
     display: none;
     position: fixed;
@@ -178,9 +227,9 @@ $(document).ready(function() {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0);  /* Mulai dari transparan */
+    background-color: rgba(0, 0, 0, 0);
     z-index: 9999;
-    transition: background-color 0.5s ease;  /* Transisi smooth untuk background */
+    transition: background-color 0.3s ease;
     opacity: 0;
 }
 
@@ -325,5 +374,45 @@ $(document).ready(function() {
         max-height: 70vh;
     }
 }
-</style>
+
+.mission_taital {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.mission_taital.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+<script>
+    function animateGallery() {
+        elements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            const delay = element.dataset.delay || 0;
+
+            if (rect.top <= windowHeight - 50) {
+                setTimeout(() => {
+                    element.classList.add('visible');
+                }, delay); 
+            } else {
+                element.classList.remove('visible');
+            }
+        });
+    }
+    setTimeout(animateGallery, 50);
+
+
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                animateGallery();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+});
+</script>
 @endpush

@@ -6,7 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gallery extends Model
 {
-    protected $fillable = ['judul', 'deskripsi', 'post_id'];
+    protected $fillable = [
+        'post_id',
+        'posisi',
+        'status'
+    ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($gallery) {
+            $gallery->images()->delete();
+        });
+    }
 
     public function images()
     {

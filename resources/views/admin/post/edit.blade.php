@@ -50,6 +50,7 @@
                     <textarea type="text" name="isi" class="form-control" id="isi" required>{{ $data['isi'] }}</textarea>
                 </div>
                 <br>
+                <a href="{{ url('/post') }}" class="btn btn-secondary ms-2">Kembali</a>
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
             </div>

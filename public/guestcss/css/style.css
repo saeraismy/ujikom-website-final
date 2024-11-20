@@ -470,16 +470,29 @@ button.donate_btn {
     margin-bottom: 30px;
     font-family: 'Open Sans', sans-serif;
     position: relative;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.program_title.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .program_title::after {
     content: '';
     display: block;
-    width: 100px;
+    width: 0;
     height: 4px;
-    background-color: #120a78; /* Blue color */
+    background-color: #120a78;
     margin: 10px auto 0;
     border-radius: 2px;
+    transition: width 1s ease;
+}
+
+.program_title.visible::after {
+    width: 100px;
 }
 
 
@@ -498,6 +511,15 @@ button.donate_btn {
     height: 100%;
     padding: 30px 20px 70px 20px;
     margin-bottom: 30px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+}
+
+.box_main.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .icon_1 {
@@ -521,6 +543,9 @@ button.donate_btn {
     color: #fff;
     font-weight: bold;
     padding-top: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
 }
 
 .lorem_text {
@@ -529,6 +554,8 @@ button.donate_btn {
     font-size: 16px;
     color: #fff;
     text-align: center;
+    transition: all 0.4s ease;
+    opacity: 0.8;
 }
 
 .join_bt {
@@ -549,6 +576,9 @@ button.donate_btn {
 
 .box_main:hover {
     background-color: #f64646;
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .box_main.active {
@@ -1974,5 +2004,98 @@ input.address_text::placeholder {
     .back-to-top i {
         font-size: 20px;
     }
+}
+
+/* Animasi untuk elemen saat di-scroll */
+.animate-text {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animasi untuk box jurusan */
+.box_main {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+}
+
+.box_main.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animasi hover untuk box jurusan */
+.box_main:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animasi untuk gambar jurusan */
+.icon_1 img, .icon_tjkt img {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.box_main:hover .icon_1 img,
+.box_main:hover .icon_tjkt img {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* Animasi untuk teks jurusan */
+.volunteer_text {
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.box_main:hover .volunteer_text {
+    color: #007bff;
+    transform: scale(1.05);
+}
+
+.lorem_text {
+    transition: all 0.4s ease;
+    opacity: 0.8;
+}
+
+.box_main:hover .lorem_text {
+    color: #333;
+    opacity: 1;
+}
+
+/* Animasi untuk judul program */
+.program_title {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.program_title.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Efek stagger untuk box jurusan */
+.box_main:nth-child(1) { transition-delay: 0.1s; }
+.box_main:nth-child(2) { transition-delay: 0.2s; }
+.box_main:nth-child(3) { transition-delay: 0.3s; }
+.box_main:nth-child(4) { transition-delay: 0.4s; }
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+
+.animate-on-scroll.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 

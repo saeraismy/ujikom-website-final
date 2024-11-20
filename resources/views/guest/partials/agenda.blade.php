@@ -1,15 +1,12 @@
-<div id="agenda" class="events_section layout_padding">
+<div id="agenda" class="events_section">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1 class="news_taital">
-                    <i class="fas fa-calendar me-2"></i>
-                    Agenda Sekolah
-                </h1>
-            </div>
-        </div>
-
-        <div class="calendar-container">
+        <h1 class="events_taital">
+            <i class="fas fa-calendar-alt"></i> Agenda Sekolah
+        </h1>
+        <p class="events_text">
+            <i class="fas fa-clock"></i> Jadwal kegiatan dan acara penting sekolah
+        </p>
+        <div class="calendar-container animate-box">
             <div class="calendar-header">
                 <button class="btn btn-link" id="prevMonth"><i class="fas fa-chevron-left"></i></button>
                 <h2 id="monthDisplay"></h2>
@@ -84,6 +81,14 @@
     padding: 20px;
     margin-top: 20px;
     width: 100%;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.calendar-container.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Calendar Header */
@@ -148,10 +153,12 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    transition: all 0.3s ease;
 }
 
 .calendar-date:hover {
-    background: #f8f9fa;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .calendar-date.has-event {
@@ -312,6 +319,23 @@
         margin-bottom: 15px;
     }
 }
+
+.events_taital i,
+.events_text i {
+    margin-right: 10px;
+    color: #120a78;
+}
+
+.events_taital, .events_text {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.events_taital.visible, .events_text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 </style>
 @endpush
 
@@ -392,6 +416,26 @@ $(document).ready(function() {
 
     // Debug untuk memeriksa data agenda
     console.log('Agenda Data:', @json($agenda));
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    function animateAgenda() {
+        const elements = document.querySelectorAll('.events_taital, .events_text, .calendar-container');
+        elements.forEach((element, index) => {
+            const elementTop = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            if (elementTop < windowHeight - 50) {
+                setTimeout(() => {
+                    element.classList.add('visible');
+                }, index * 200);
+            }
+        });
+    }
+
+    window.addEventListener('scroll', animateAgenda);
+    // Trigger initial animation
+    animateAgenda();
 });
 </script>
 @endpush

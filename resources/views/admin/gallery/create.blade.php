@@ -34,6 +34,7 @@
                             </div>
                         </div>
                     </div>
+                    <a href="{{ url('/gallery') }}" class="btn btn-secondary ms-2">Kembali</a>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
             </div>

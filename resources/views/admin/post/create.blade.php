@@ -45,6 +45,7 @@
                         <label for="isi" class="form-label">Isi</label>
                         <textarea type="text" name="isi" class="form-control" id="isi" required></textarea>
                     </div>
+                    <a href="{{ url('/post') }}" class="btn btn-secondary ms-2">Kembali</a>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
             </div>

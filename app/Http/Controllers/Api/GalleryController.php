@@ -84,10 +84,18 @@ class GalleryController extends Controller
 
     public function destroy(Gallery $gallery)
     {
-        $gallery->delete();
-        return response()->json([
-            'message' => 'Gallery Deleted Successfully',
-        ], 200);
+        try {
+            $gallery->delete();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Gallery Berhasil Dihapus',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Gagal menghapus gallery: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     public function getByPost($postId)

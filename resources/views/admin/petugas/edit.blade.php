@@ -18,8 +18,8 @@
             <label for="password">Password (Kosongkan jika tidak diubah):</label>
             <input type="password" class="form-control" name="password">
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
         <a href="{{ url('/petugas') }}" class="btn btn-secondary">Kembali</a>
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
 @endsection
