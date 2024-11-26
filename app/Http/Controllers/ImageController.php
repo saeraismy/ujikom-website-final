@@ -24,7 +24,6 @@ class ImageController extends Controller
             'judul' => 'required',
         ]);
 
-        // Membuat multipart form data untuk upload file
         $multipart = [
             [
                 'name' => 'gallery_id',

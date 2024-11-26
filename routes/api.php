@@ -23,6 +23,14 @@ Route::apiResource('images', ImageController::class)->except(['update']);
 Route::get('/galleries/by-post/{postId}', [GalleryController::class, 'getByPost']);
 Route::get('/images/count', [ImageController::class, 'count']);
 
+Route::get('/images/{filename}', function ($filename) {
+    $path = public_path('images/' . $filename);
+    if (!file_exists($path)) {
+        return response()->json(['error' => 'File not found'], 404);
+    }
+    return response()->file($path);
+});
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');

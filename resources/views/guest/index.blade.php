@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="shortcut icon" href="{{ asset('images/logoSMKN4.png') }}">
     <style>
-    /* Animasi dasar untuk elemen yang akan dianimasikan */
     .animate-text, .animate-box, .box_main, .about_text, .about_taital {
         opacity: 0;
         transform: translateY(30px);
         transition: all 0.8s ease;
     }
 
-    /* Animasi ketika elemen menjadi visible */
     .animate-text.visible,
     .animate-box.visible,
     .box_main.visible,
@@ -24,14 +22,12 @@
         transform: translateY(0);
     }
 
-    /* Animasi untuk box yang bergerak dari kiri */
     .slide-from-left {
         opacity: 0;
         transform: translateX(-100px);
         transition: all 0.8s ease;
     }
 
-    /* Animasi untuk box yang bergerak dari kanan */
     .slide-from-right {
         opacity: 0;
         transform: translateX(100px);
@@ -44,7 +40,6 @@
         transform: translateX(0);
     }
 
-    /* Animasi untuk scaling */
     .scale-in {
         opacity: 0;
         transform: scale(0.5);
@@ -56,7 +51,6 @@
         transform: scale(1);
     }
 
-    /* Tambahkan transisi yang lebih smooth */
     .animate-text, .animate-box, .box_main, .about_text, .about_taital,
     .slide-from-left, .slide-from-right, .scale-in {
         transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -156,7 +150,6 @@
                 const elementBottom = element.getBoundingClientRect().bottom;
                 const elementCenterY = elementTop + (element.offsetHeight / 2);
 
-                // Elemen dalam viewport
                 if (elementTop < windowHeight - triggerPoint && elementBottom > 0) {
                     // Menentukan arah animasi berdasarkan arah scroll dan posisi elemen
                     if (scrollingDown) {
@@ -193,10 +186,8 @@
             lastScrollTop = st <= 0 ? 0 : st; // Untuk Mobile atau negative scrolling
         }
 
-        // Jalankan animasi saat halaman dimuat
         setTimeout(animateOnScroll, 300);
 
-        // Optimasi scroll event dengan throttling
         let ticking = false;
         window.addEventListener('scroll', function() {
             if (!ticking) {
@@ -208,7 +199,6 @@
             }
         });
 
-        // Tambahkan event listener untuk resize window
         window.addEventListener('resize', function() {
             if (!ticking) {
                 window.requestAnimationFrame(function() {
@@ -238,7 +228,7 @@
             }
 
             window.addEventListener('scroll', checkScroll);
-            checkScroll(); // Check on initial load
+            checkScroll(); 
         });
     </script>
 </body>

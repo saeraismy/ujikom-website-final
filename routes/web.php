@@ -11,6 +11,7 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create']);
 
@@ -55,6 +56,21 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/images/create', [ImageController::class, 'create']);
     Route::get('/images/{id}', [ImageController::class, 'delete'])->name('images.delete');
+
+
+    Route::get('/images/{filename}', function ($filename) {
+        $path = public_path('images/' . $filename);
+
+        if (!file_exists($path)) {
+            return response()->json(['error' => 'Image not found'], 404);
+        }
+
+        /** @var BinaryFileResponse $response */
+        $response = response()->file($path);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+
+        return $response;
+    });
 
 });
 

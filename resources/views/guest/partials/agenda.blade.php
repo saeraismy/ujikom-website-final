@@ -84,6 +84,7 @@
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s ease;
+    box-sizing: border-box;
 }
 
 .calendar-container.visible {
@@ -222,19 +223,126 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .calendar-days > div {
+    .calendar-container {
+        padding: 10px;
+        margin: 10px 0;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .calendar-grid {
+        width: 100%;
         font-size: 0.8rem;
-        padding: 5px;
+    }
+
+    .calendar-days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        width: 100%;
+    }
+
+    .calendar-dates {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        width: 100%;
+        gap: 1px;
     }
 
     .calendar-date {
-        min-height: 80px;
+        min-height: 45px;
+        height: auto;
+        padding: 2px;
+        aspect-ratio: auto;
     }
 
     .event-preview {
-        font-size: 10px;
+        font-size: 8px;
+        padding-top: 12px;
+        margin-top: 2px;
         -webkit-line-clamp: 1;
     }
+}
+
+@media (max-width: 480px) {
+    .calendar-container {
+        padding: 5px;
+    }
+
+    .calendar-header {
+        padding: 5px;
+    }
+
+    .calendar-days > div {
+        font-size: 0.6rem;
+        padding: 2px;
+    }
+
+    .calendar-date {
+        min-height: 40px;
+        padding: 2px;
+    }
+
+    .date-number {
+        font-size: 9px;
+        top: 2px;
+        left: 2px;
+    }
+
+    .event-preview {
+        padding-top: 10px;
+        font-size: 7px;
+        margin-top: 0;
+    }
+
+    .event-dot {
+        width: 4px;
+        height: 4px;
+        bottom: 2px;
+    }
+
+    #monthDisplay {
+        font-size: 0.9rem;
+    }
+
+    #prevMonth, #nextMonth {
+        padding: 3px 8px;
+        font-size: 0.7rem;
+    }
+}
+
+/* Tambahkan style untuk device dengan layar kecil dalam mode landscape */
+@media (max-height: 500px) and (orientation: landscape) {
+    .calendar-container {
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+
+    .calendar-date {
+        min-height: 35px;
+    }
+
+    .event-preview {
+        display: none;
+    }
+
+    .calendar-days > div {
+        padding: 1px;
+    }
+}
+
+/* Tambahkan style untuk memastikan grid layout konsisten */
+.calendar-days,
+.calendar-dates {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.calendar-date {
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
 }
 
 /* Empty Cells */

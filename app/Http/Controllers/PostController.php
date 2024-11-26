@@ -26,17 +26,14 @@ class PostController extends Controller
         $response = $this->client->request('GET', $this->baseUrl . '/posts');
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
-
-        // Mengambil semua data
+        
         $allPosts = collect($contentArray['data']);
 
-        // Menghitung offset berdasarkan halaman
         $offset = ($page - 1) * $this->perPage;
 
         // Mengambil hanya 3 item untuk halaman saat ini
         $currentPagePosts = $allPosts->slice($offset, $this->perPage)->values();
 
-        // Membuat paginator
         $posts = new LengthAwarePaginator(
             $currentPagePosts,
             $allPosts->count(),

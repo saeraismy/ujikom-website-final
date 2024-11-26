@@ -27,13 +27,10 @@ class GalleryController extends Controller
         $contentArray = json_decode($content, true);
         $allData = collect($contentArray['data']);
 
-        // Menghitung offset berdasarkan halaman
         $offset = ($page - 1) * $this->perPage;
 
-        // Mengambil item untuk halaman saat ini
         $currentPageData = $allData->slice($offset, $this->perPage)->values();
 
-        // Membuat paginator
         $data = new LengthAwarePaginator(
             $currentPageData,
             $allData->count(),

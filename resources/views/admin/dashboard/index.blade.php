@@ -1,7 +1,6 @@
 @extends('admin.index')
 @section('content')
 <div class="container-fluid">
-    <!-- Statistik Cards -->
     <div class="row g-4 mb-4">
         <div class="col-md-4">
             <div class="card bg-primary text-white h-100">
@@ -52,7 +51,6 @@
         </div>
     </div>
 
-    <!-- Postingan Terbaru -->
     <div class="row mt-4">
         <div class="col-12">
             <h5 class="mb-4">Postingan Terbaru</h5>

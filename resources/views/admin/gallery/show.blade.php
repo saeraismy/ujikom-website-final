@@ -49,12 +49,10 @@
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h4 class="m-0 p-0"><i data-feather="image"></i> Foto</h4>
 
-                    <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#addImageModal">
                         + Foto
                     </button>
-
                     <!-- Modal -->
                     <div class="modal fade" id="addImageModal" tabindex="-1" aria-labelledby="addImageModalLabel"
                         aria-hidden="true">
